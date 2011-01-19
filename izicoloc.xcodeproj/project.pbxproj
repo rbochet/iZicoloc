@@ -13,6 +13,16 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		73B24B1412E78F990092E3A3 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B24B1212E78F990092E3A3 /* HomeViewController.m */; };
+		73B24B1512E78F990092E3A3 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B24B1312E78F990092E3A3 /* HomeViewController.xib */; };
+		73B24B4612E792A10092E3A3 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B24B4412E792A10092E3A3 /* MessageViewController.m */; };
+		73B24B4712E792A10092E3A3 /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B24B4512E792A10092E3A3 /* MessageViewController.xib */; };
+		73B24B5012E793EF0092E3A3 /* CorveeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B24B4E12E793EF0092E3A3 /* CorveeViewController.m */; };
+		73B24B5112E793EF0092E3A3 /* CorveeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B24B4F12E793EF0092E3A3 /* CorveeViewController.xib */; };
+		73B24B6712E794580092E3A3 /* DepensesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B24B6512E794580092E3A3 /* DepensesViewController.m */; };
+		73B24B6812E794580092E3A3 /* DepensesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B24B6612E794580092E3A3 /* DepensesViewController.xib */; };
+		73B24B7412E794F10092E3A3 /* CoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B24B7212E794F10092E3A3 /* CoursesViewController.m */; };
+		73B24B7512E794F10092E3A3 /* CoursesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B24B7312E794F10092E3A3 /* CoursesViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +35,21 @@
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* izicoloc_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = izicoloc_Prefix.pch; sourceTree = "<group>"; };
+		73B24B1112E78F990092E3A3 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		73B24B1212E78F990092E3A3 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		73B24B1312E78F990092E3A3 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomeViewController.xib; path = Classes/HomeViewController.xib; sourceTree = "<group>"; };
+		73B24B4312E792A10092E3A3 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		73B24B4412E792A10092E3A3 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		73B24B4512E792A10092E3A3 /* MessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MessageViewController.xib; path = Classes/MessageViewController.xib; sourceTree = "<group>"; };
+		73B24B4D12E793EF0092E3A3 /* CorveeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CorveeViewController.h; sourceTree = "<group>"; };
+		73B24B4E12E793EF0092E3A3 /* CorveeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CorveeViewController.m; sourceTree = "<group>"; };
+		73B24B4F12E793EF0092E3A3 /* CorveeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CorveeViewController.xib; path = Classes/CorveeViewController.xib; sourceTree = "<group>"; };
+		73B24B6412E794580092E3A3 /* DepensesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepensesViewController.h; sourceTree = "<group>"; };
+		73B24B6512E794580092E3A3 /* DepensesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepensesViewController.m; sourceTree = "<group>"; };
+		73B24B6612E794580092E3A3 /* DepensesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DepensesViewController.xib; path = Classes/DepensesViewController.xib; sourceTree = "<group>"; };
+		73B24B7112E794F10092E3A3 /* CoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursesViewController.h; sourceTree = "<group>"; };
+		73B24B7212E794F10092E3A3 /* CoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursesViewController.m; sourceTree = "<group>"; };
+		73B24B7312E794F10092E3A3 /* CoursesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CoursesViewController.xib; path = Classes/CoursesViewController.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* izicoloc-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "izicoloc-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +72,11 @@
 			children = (
 				1D3623240D0F684500981E51 /* izicolocAppDelegate.h */,
 				1D3623250D0F684500981E51 /* izicolocAppDelegate.m */,
+				73B24B1712E78FB00092E3A3 /* Home */,
+				73B24B4812E792AB0092E3A3 /* Message */,
+				73B24B6912E794640092E3A3 /* Depenses */,
+				73B24B5212E793F90092E3A3 /* Corvee */,
+				73B24B7612E794FB0092E3A3 /* Courses */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -84,6 +114,11 @@
 			isa = PBXGroup;
 			children = (
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				73B24B6612E794580092E3A3 /* DepensesViewController.xib */,
+				73B24B4F12E793EF0092E3A3 /* CorveeViewController.xib */,
+				73B24B7312E794F10092E3A3 /* CoursesViewController.xib */,
+				73B24B4512E792A10092E3A3 /* MessageViewController.xib */,
+				73B24B1312E78F990092E3A3 /* HomeViewController.xib */,
 				8D1107310486CEB800E47090 /* izicoloc-Info.plist */,
 			);
 			name = Resources;
@@ -97,6 +132,51 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		73B24B1712E78FB00092E3A3 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				73B24B1112E78F990092E3A3 /* HomeViewController.h */,
+				73B24B1212E78F990092E3A3 /* HomeViewController.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		73B24B4812E792AB0092E3A3 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				73B24B4312E792A10092E3A3 /* MessageViewController.h */,
+				73B24B4412E792A10092E3A3 /* MessageViewController.m */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		73B24B5212E793F90092E3A3 /* Corvee */ = {
+			isa = PBXGroup;
+			children = (
+				73B24B4D12E793EF0092E3A3 /* CorveeViewController.h */,
+				73B24B4E12E793EF0092E3A3 /* CorveeViewController.m */,
+			);
+			name = Corvee;
+			sourceTree = "<group>";
+		};
+		73B24B6912E794640092E3A3 /* Depenses */ = {
+			isa = PBXGroup;
+			children = (
+				73B24B6412E794580092E3A3 /* DepensesViewController.h */,
+				73B24B6512E794580092E3A3 /* DepensesViewController.m */,
+			);
+			name = Depenses;
+			sourceTree = "<group>";
+		};
+		73B24B7612E794FB0092E3A3 /* Courses */ = {
+			isa = PBXGroup;
+			children = (
+				73B24B7112E794F10092E3A3 /* CoursesViewController.h */,
+				73B24B7212E794F10092E3A3 /* CoursesViewController.m */,
+			);
+			name = Courses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +229,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				73B24B1512E78F990092E3A3 /* HomeViewController.xib in Resources */,
+				73B24B4712E792A10092E3A3 /* MessageViewController.xib in Resources */,
+				73B24B5112E793EF0092E3A3 /* CorveeViewController.xib in Resources */,
+				73B24B6812E794580092E3A3 /* DepensesViewController.xib in Resources */,
+				73B24B7512E794F10092E3A3 /* CoursesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +246,11 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* izicolocAppDelegate.m in Sources */,
+				73B24B1412E78F990092E3A3 /* HomeViewController.m in Sources */,
+				73B24B4612E792A10092E3A3 /* MessageViewController.m in Sources */,
+				73B24B5012E793EF0092E3A3 /* CorveeViewController.m in Sources */,
+				73B24B6712E794580092E3A3 /* DepensesViewController.m in Sources */,
+				73B24B7412E794F10092E3A3 /* CoursesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,12 @@
 
 #import "izicolocAppDelegate.h"
 
+#import "HomeViewController.h"
+#import "MessageViewController.h"
+#import "CorveeViewController.h"
+#import "DepensesViewController.h"
+#import "CoursesViewController.h"
+
 @implementation izicolocAppDelegate
 
 @synthesize window;
@@ -18,8 +24,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-    // Override point for customization after application launch.
+    // Home View Controller
+	HomeViewController* homevc = [[[HomeViewController alloc] init] autorelease];
+	
+	// Message View Controller 
+	MessageViewController* messagevc = [[[MessageViewController alloc] init] autorelease];
+	
+	// Corvee View Controller
+	CorveeViewController* corveevc = [[[CorveeViewController alloc] init] autorelease];
+	
+	// Depenses View Controller
+	DepensesViewController* depensesvc = [[[DepensesViewController alloc] init] autorelease];
+	
+	// Courses View Controller
+	CoursesViewController* coursesvc = [[[CoursesViewController alloc] init] autorelease];
+	
+	// Load the TabBar
+	UITabBarController* tbvc = [[UITabBarController alloc] init];
+	tbvc.viewControllers = [NSArray arrayWithObjects:homevc, messagevc, corveevc, coursesvc, depensesvc, nil];
     
+	// Display the tabBar's view
+	[self.window addSubview:tbvc.view];
+	
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -75,6 +101,7 @@
 
 
 - (void)dealloc {
+	
     [window release];
     [super dealloc];
 }
