@@ -272,7 +272,6 @@
 								<string>73B24B7612E794FB0092E3A3</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
-								<string>73B24BA012E79CF40092E3A3</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
@@ -334,25 +333,33 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>73B24BC812E7A00C0092E3A3</string>
+										<string>73B24C4212E7ACC60092E3A3</string>
 										<key>history</key>
 										<array>
 											<string>73B24B5312E794400092E3A3</string>
 											<string>73B24B5412E794400092E3A3</string>
 											<string>73B24B5712E794400092E3A3</string>
 											<string>73B24BA212E79D020092E3A3</string>
-											<string>73B24BA412E79D020092E3A3</string>
-											<string>73B24BA512E79D020092E3A3</string>
-											<string>73B24BA712E79D020092E3A3</string>
-											<string>73B24BA912E79D020092E3A3</string>
 											<string>73B24BAA12E79D020092E3A3</string>
-											<string>73B24BAC12E79D020092E3A3</string>
-											<string>73B24BC312E7A00C0092E3A3</string>
-											<string>73B24BC412E7A00C0092E3A3</string>
-											<string>73B24BC512E7A00C0092E3A3</string>
 											<string>73B24BC612E7A00C0092E3A3</string>
-											<string>73B24BC712E7A00C0092E3A3</string>
-											<string>73B24B5612E794400092E3A3</string>
+											<string>73B24C0212E7A9DB0092E3A3</string>
+											<string>73B24C0312E7A9DB0092E3A3</string>
+											<string>73B24C0412E7A9DB0092E3A3</string>
+											<string>73B24C0512E7A9DB0092E3A3</string>
+											<string>73B24C0612E7A9DB0092E3A3</string>
+											<string>73B24C0712E7A9DB0092E3A3</string>
+											<string>73B24C0812E7A9DB0092E3A3</string>
+											<string>73B24C0912E7A9DB0092E3A3</string>
+											<string>73B24C0A12E7A9DB0092E3A3</string>
+											<string>73B24C0B12E7A9DB0092E3A3</string>
+											<string>73B24C0C12E7A9DB0092E3A3</string>
+											<string>73B24C0D12E7A9DB0092E3A3</string>
+											<string>73B24C0E12E7A9DB0092E3A3</string>
+											<string>73B24C0F12E7A9DB0092E3A3</string>
+											<string>73B24C3B12E7AC9E0092E3A3</string>
+											<string>73B24C3C12E7AC9E0092E3A3</string>
+											<string>73B24C3D12E7AC9E0092E3A3</string>
+											<string>73B24C3E12E7AC9E0092E3A3</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -550,6 +557,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>73B24C4312E7ACC60092E3A3</string>
 		<string>73B24B6112E794400092E3A3</string>
 		<string>73B24B6312E794400092E3A3</string>
 		<string>1C78EAAD065D492600B07095</string>
@@ -579,7 +587,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>ParameterViewController.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -892,6 +900,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

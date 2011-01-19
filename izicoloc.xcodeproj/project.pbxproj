@@ -30,6 +30,9 @@
 		73B24B9F12E79CF00092E3A3 /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B24B9A12E79CF00092E3A3 /* message.png */; };
 		73B24BDC12E7A2C90092E3A3 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B24BDB12E7A2C90092E3A3 /* icon.png */; };
 		73B24BDE12E7A2D70092E3A3 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B24BDD12E7A2D70092E3A3 /* icon@2x.png */; };
+		73B24C0112E7A7BD0092E3A3 /* param.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B24C0012E7A7BD0092E3A3 /* param.png */; };
+		73B24C2B12E7ABEF0092E3A3 /* ParameterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B24C2912E7ABEF0092E3A3 /* ParameterViewController.m */; };
+		73B24C2C12E7ABEF0092E3A3 /* ParameterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B24C2A12E7ABEF0092E3A3 /* ParameterViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,10 @@
 		73B24B9A12E79CF00092E3A3 /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
 		73B24BDB12E7A2C90092E3A3 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		73B24BDD12E7A2D70092E3A3 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		73B24C0012E7A7BD0092E3A3 /* param.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = param.png; sourceTree = "<group>"; };
+		73B24C2812E7ABEF0092E3A3 /* ParameterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParameterViewController.h; sourceTree = "<group>"; };
+		73B24C2912E7ABEF0092E3A3 /* ParameterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParameterViewController.m; sourceTree = "<group>"; };
+		73B24C2A12E7ABEF0092E3A3 /* ParameterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ParameterViewController.xib; path = Classes/ParameterViewController.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* izicoloc-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "izicoloc-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +139,7 @@
 				73B24B6612E794580092E3A3 /* DepensesViewController.xib */,
 				73B24B4F12E793EF0092E3A3 /* CorveeViewController.xib */,
 				73B24B7312E794F10092E3A3 /* CoursesViewController.xib */,
+				73B24C2A12E7ABEF0092E3A3 /* ParameterViewController.xib */,
 				73B24B4512E792A10092E3A3 /* MessageViewController.xib */,
 				73B24B1312E78F990092E3A3 /* HomeViewController.xib */,
 				8D1107310486CEB800E47090 /* izicoloc-Info.plist */,
@@ -154,6 +162,8 @@
 			children = (
 				73B24B1112E78F990092E3A3 /* HomeViewController.h */,
 				73B24B1212E78F990092E3A3 /* HomeViewController.m */,
+				73B24C2812E7ABEF0092E3A3 /* ParameterViewController.h */,
+				73B24C2912E7ABEF0092E3A3 /* ParameterViewController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -199,6 +209,7 @@
 			children = (
 				73B24B9612E79CF00092E3A3 /* corvee.png */,
 				73B24B9712E79CF00092E3A3 /* courses.png */,
+				73B24C0012E7A7BD0092E3A3 /* param.png */,
 				73B24BDD12E7A2D70092E3A3 /* icon@2x.png */,
 				73B24B9812E79CF00092E3A3 /* depenses.png */,
 				73B24BDB12E7A2C90092E3A3 /* icon.png */,
@@ -270,6 +281,8 @@
 				73B24B9F12E79CF00092E3A3 /* message.png in Resources */,
 				73B24BDC12E7A2C90092E3A3 /* icon.png in Resources */,
 				73B24BDE12E7A2D70092E3A3 /* icon@2x.png in Resources */,
+				73B24C0112E7A7BD0092E3A3 /* param.png in Resources */,
+				73B24C2C12E7ABEF0092E3A3 /* ParameterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +300,7 @@
 				73B24B5012E793EF0092E3A3 /* CorveeViewController.m in Sources */,
 				73B24B6712E794580092E3A3 /* DepensesViewController.m in Sources */,
 				73B24B7412E794F10092E3A3 /* CoursesViewController.m in Sources */,
+				73B24C2B12E7ABEF0092E3A3 /* ParameterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

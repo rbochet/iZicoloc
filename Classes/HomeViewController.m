@@ -8,6 +8,8 @@
 
 #import "HomeViewController.h"
 
+#import "ParameterViewController.h"
+
 
 @implementation HomeViewController
 
@@ -17,6 +19,8 @@
     if (self) {
         self.title = @"iZicoloc";
 		self.tabBarItem.image = [[UIImage imageNamed:@"home"] autorelease];
+		UIBarButtonItem *paramButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"param.png"] style:UIBarButtonItemStylePlain target:self action:@selector(openParametres)] autorelease];
+		self.navigationItem.rightBarButtonItem = paramButton;
     }
     return self;
 }
@@ -36,6 +40,12 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
+										
+-(void) openParametres {
+	ParameterViewController* paramvc = [[ParameterViewController alloc] init];
+	[self.navigationController pushViewController:paramvc animated:YES];
+	[paramvc release];
+}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
