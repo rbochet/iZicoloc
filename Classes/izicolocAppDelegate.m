@@ -26,22 +26,27 @@
     
     // Home View Controller
 	HomeViewController* homevc = [[[HomeViewController alloc] init] autorelease];
+	UINavigationController* navHomeVc = [[[UINavigationController alloc] initWithRootViewController:homevc] autorelease];
 	
 	// Message View Controller 
 	MessageViewController* messagevc = [[[MessageViewController alloc] init] autorelease];
+	UINavigationController* navMessageVc = [[[UINavigationController alloc] initWithRootViewController:messagevc] autorelease];
 	
 	// Corvee View Controller
 	CorveeViewController* corveevc = [[[CorveeViewController alloc] init] autorelease];
+	UINavigationController* navCorveeVc = [[[UINavigationController alloc] initWithRootViewController:corveevc] autorelease];
 	
 	// Depenses View Controller
 	DepensesViewController* depensesvc = [[[DepensesViewController alloc] init] autorelease];
+	UINavigationController* navDepensesVc = [[[UINavigationController alloc] initWithRootViewController:depensesvc] autorelease];
 	
 	// Courses View Controller
 	CoursesViewController* coursesvc = [[[CoursesViewController alloc] init] autorelease];
+	UINavigationController* navCoursesVc = [[[UINavigationController alloc] initWithRootViewController:coursesvc] autorelease];
 	
 	// Load the TabBar
 	UITabBarController* tbvc = [[UITabBarController alloc] init];
-	tbvc.viewControllers = [NSArray arrayWithObjects:homevc, messagevc, corveevc, coursesvc, depensesvc, nil];
+	tbvc.viewControllers = [NSArray arrayWithObjects:navHomeVc, navMessageVc, navCorveeVc, navCoursesVc, navDepensesVc,  nil];
     
 	// Display the tabBar's view
 	[self.window addSubview:tbvc.view];

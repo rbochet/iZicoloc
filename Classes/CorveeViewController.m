@@ -17,6 +17,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Corvée";
+		self.tabBarItem.image = [[UIImage imageNamed:@"corvee"] autorelease];
+
     }
     return self;
 }

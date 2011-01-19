@@ -16,7 +16,11 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"Suivi dépenses";
+        self.title = @"Suivi des dépenses";
+		
+		// The tabbar item title is slightly shorter
+		self.tabBarItem.image = [[UIImage imageNamed:@"depenses"] autorelease];
+		self.tabBarItem.title = @"Suivi dépenses";
     }
     return self;
 }

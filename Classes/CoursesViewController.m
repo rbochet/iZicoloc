@@ -17,6 +17,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Courses";
+		self.tabBarItem.image = [[UIImage imageNamed:@"courses"] autorelease];
     }
     return self;
 }
