@@ -20,12 +20,17 @@
     [super viewDidLoad];
 	self.title = @"Paramètres";
 	
-	// Load the prefs
+	// TEST AREA //
+	NSMutableDictionary* myDic = [[NSMutableDictionary alloc] init];
+	[myDic setValue:@"Romain" forKey:@"prenom"];
+	[myDic setValue:@"Bochet" forKey:@"nom"];
+	[[NSUserDefaults standardUserDefaults] setObject:myDic forKey:@"identite"];
+	[myDic release];
+	
+	// Load the prefs if they exists. Otherwise, pointers are niled.
 	colocs = [[NSUserDefaults standardUserDefaults] arrayForKey:@"colocataires"];
 	identite = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"identite"]; 
 	fichiers = [[NSUserDefaults standardUserDefaults] arrayForKey:@"fichiers"];
-	
-	NSLog(@"%@", identite); // NUL SI NON INIT
 	
 }
 
@@ -75,7 +80,10 @@
 			return 1;
 			break;
 		case 1: // For the other guys
-			return (2 +1); // +1 allow to add a friend
+			if(colocs != nil) // All the coloc + the add line
+				return [colocs count] +1; 
+			else // Just the add line
+				return 1;
 			break;
 		case 2: // For the files (courses/suivi dépenses)
 			return 2;
@@ -100,35 +108,24 @@
     	
     switch (indexPath.section) {
 		case 0: // For your identity
-			cell.textLabel.text = @"Identité";
+			if(identite != nil) { // The identity is already set
+				cell.textLabel.text = [identite objectForKey:@"prenom"];
+			} else {
+				cell.textLabel.text = @"Me définir";
+			}
 			break;
-		case 1: // Each row is another guy
-			switch (indexPath.row) {
-				case 0: // For your identity
-					cell.textLabel.text =  @"Coloc 1";
-					break;
-				case 1: // For the other guys
-					cell.textLabel.text =  @"Coloc 2";
-					break;
-				case 2: // For the files (courses/suivi dépenses)
-					cell.textLabel.text =  @"Ajouter coloc";
-					break;
-				default:
-					NSLog(@"ERREUR");
-					break;
+		case 1: // Each row is another guy + 1 extra line for add one more
+			if(colocs != nil && indexPath.row < [colocs count]) { // The interesting coloc exists
+				cell.textLabel.text = [[colocs objectAtIndex:indexPath.row] objectForKey:@"prenom"];
+			} else {
+				cell.textLabel.text = @"Ajouter un coloc";
 			}
 			break;
 		case 2: // For the files (courses/suivi dépenses)
-			switch (indexPath.row) {
-				case 0: // Fichier comptes
-					cell.textLabel.text =  @"Fichier comptes";
-					break;
-				case 1: // Fichier suivi des dépenses
-					cell.textLabel.text =  @"Fichier dépenses";
-					break;
-				default:
-					NSLog(@"ERREUR");
-					break;
+			if (fichiers == nil || [fichiers objectAtIndex:indexPath.row] == nil) { // If the array isn't defined, or the interesting one
+				cell.textLabel.text = @"À définir";
+			} else { // Display the good one :)
+				cell.textLabel.text = [fichiers objectAtIndex:indexPath.row];
 			}
 			break;
 		default:
