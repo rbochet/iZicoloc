@@ -42,7 +42,7 @@
 */
 										
 -(void) openParametres {
-	ParameterViewController* paramvc = [[ParameterViewController alloc] init];
+	ParameterViewController* paramvc = [[ParameterViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[self.navigationController pushViewController:paramvc animated:YES];
 	[paramvc release];
 }

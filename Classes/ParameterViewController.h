@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 
 @interface ParameterViewController : UITableViewController {
-
+	NSArray* colocs;
+	NSDictionary *identite; 
+	NSArray* fichiers;
 }
 
 @end

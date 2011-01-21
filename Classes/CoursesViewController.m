@@ -18,6 +18,7 @@
     if (self) {
         self.title = @"Courses";
 		self.tabBarItem.image = [[UIImage imageNamed:@"courses"] autorelease];
+		self.tabBarItem.badgeValue = @"5";
     }
     return self;
 }

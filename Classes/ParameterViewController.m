@@ -19,6 +19,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.title = @"Paramètres";
+	
+	// Load the prefs
+	colocs = [[NSUserDefaults standardUserDefaults] arrayForKey:@"colocataires"];
+	identite = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"identite"]; 
+	fichiers = [[NSUserDefaults standardUserDefaults] arrayForKey:@"fichiers"];
+	
+	NSLog(@"%@", identite); // NUL SI NON INIT
+	
 }
 
 
@@ -33,7 +41,7 @@
 }
 */
 /*
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisapp	ear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
 */
@@ -56,13 +64,27 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 3;
+    switch (section) {
+		case 0: // For your identity
+			return 1;
+			break;
+		case 1: // For the other guys
+			return (2 +1); // +1 allow to add a friend
+			break;
+		case 2: // For the files (courses/suivi dépenses)
+			return 2;
+			break;
+		default:
+			NSLog(@"ERREUR");
+			break;
+	}
+	return  0;
 }
 
 
@@ -75,9 +97,45 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
-    // Configure the cell...
-    
+    	
+    switch (indexPath.section) {
+		case 0: // For your identity
+			cell.textLabel.text = @"Identité";
+			break;
+		case 1: // Each row is another guy
+			switch (indexPath.row) {
+				case 0: // For your identity
+					cell.textLabel.text =  @"Coloc 1";
+					break;
+				case 1: // For the other guys
+					cell.textLabel.text =  @"Coloc 2";
+					break;
+				case 2: // For the files (courses/suivi dépenses)
+					cell.textLabel.text =  @"Ajouter coloc";
+					break;
+				default:
+					NSLog(@"ERREUR");
+					break;
+			}
+			break;
+		case 2: // For the files (courses/suivi dépenses)
+			switch (indexPath.row) {
+				case 0: // Fichier comptes
+					cell.textLabel.text =  @"Fichier comptes";
+					break;
+				case 1: // Fichier suivi des dépenses
+					cell.textLabel.text =  @"Fichier dépenses";
+					break;
+				default:
+					NSLog(@"ERREUR");
+					break;
+			}
+			break;
+		default:
+			NSLog(@"ERREUR");
+			break;
+	}
+	
     return cell;
 }
 
@@ -148,8 +206,9 @@
 }
 
 - (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+	[colocs release];
+	[identite release];
+	[fichiers release];
 }
 
 
