@@ -11,27 +11,66 @@
 
 @implementation ParameterViewController
 
+#pragma mark -
+#pragma mark Deal with stored data
+- (void)displayStoredData {
+	// Load the data
+	NSArray *colocsL = [[NSUserDefaults standardUserDefaults] arrayForKey:@"colocataires"];
+	NSDictionary *identiteL = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"identite"]; 
+	NSArray *fichiersL = [[NSUserDefaults standardUserDefaults] arrayForKey:@"fichiers"];
+	
+	// Display  the data
+	NSLog(@"---- DISPLAY STORED DATA ----");
+	NSLog(@"identite : %@", identiteL);
+	NSLog(@"-----------------------------");
+	NSLog(@"colocs : %@", colocsL);
+	NSLog(@"-----------------------------");
+	NSLog(@"fichiers : %@", fichiersL);
+	NSLog(@"-- END DISPLAY STORED DATA --");
+}
+
+- (void)delParameters {
+	// Write nil in all the parameters
+	[[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"colocataires"];
+	[[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"identite"];
+	[[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"fichiers"];
+}
+
+
 
 #pragma mark -
 #pragma mark View lifecycle
 
+// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+		self.title = @"Paramètres";
+		UIBarButtonItem *resetButton = [[[UIBarButtonItem alloc] initWithTitle:@"Reset" style:UIBarButtonItemStylePlain target:self action:@selector(delParameters)] autorelease];
+		self.navigationItem.rightBarButtonItem = resetButton;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.title = @"Paramètres";
 	
 	// TEST AREA //
-	NSMutableDictionary* myDic = [[NSMutableDictionary alloc] init];
+	/*NSMutableDictionary* myDic = [[NSMutableDictionary alloc] init];
 	[myDic setValue:@"Romain" forKey:@"prenom"];
 	[myDic setValue:@"Bochet" forKey:@"nom"];
 	[[NSUserDefaults standardUserDefaults] setObject:myDic forKey:@"identite"];
-	[myDic release];
+	[myDic release];*/
 	
 	// Load the prefs if they exists. Otherwise, pointers are niled.
-	colocs = [[NSUserDefaults standardUserDefaults] arrayForKey:@"colocataires"];
-	identite = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"identite"]; 
-	fichiers = [[NSUserDefaults standardUserDefaults] arrayForKey:@"fichiers"];
+	NSArray *colocsImmutable = [[NSUserDefaults standardUserDefaults] arrayForKey:@"colocataires"];
+	colocs = [[NSMutableArray alloc] initWithArray:colocsImmutable];
+	[colocsImmutable release];
+	identite = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"identite"] retain]; 
+	fichiers = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"fichiers"] retain];
 	
+	[self displayStoredData];
 }
 
 
@@ -181,15 +220,111 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+	// Store the indexpath to let the callback know which field he has to replace
+	indexPathForContactChooser = indexPath;
+	
+	
+	if (indexPath.section < 2) { // Edit people
+		[self showPicker];
+	} else { // Edit files
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pas encore implémentée" 
+														message:@"Cette fonctionalité n'est pas implémentée" 
+													   delegate:nil 
+											  cancelButtonTitle:@"Retour aux params" 
+											  otherButtonTitles:nil];
+		[alert show];
+		[alert release];
+		
+	}
+
 }
+
+#pragma mark -
+#pragma mark AddressBook Management
+
+// Show the picker
+-(void) showPicker {
+    ABPeoplePickerNavigationController *picker =
+	[[ABPeoplePickerNavigationController alloc] init];
+    picker.peoplePickerDelegate = self;
+	
+    [self presentModalViewController:picker animated:YES];
+	
+	
+    [picker release];
+}
+
+
+- (void)peoplePickerNavigationControllerDidCancel:
+(ABPeoplePickerNavigationController *)peoplePicker {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
+- (BOOL)peoplePickerNavigationController:
+(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person {
+	
+	// Load data from adress book
+	NSString* prenom = (NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+	NSString* nom = (NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);	
+	
+	// Copy in the contact struct TODO TEL MAIL MULTIVALUE
+	NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
+	[dic setValue:prenom forKey:@"prenom"];
+	[dic setValue:nom forKey:@"nom"];
+	[prenom release];
+	[nom release];
+
+	/*
+	 
+	 // HERE IS THE PROBLEM W/ MULTIVALUE LABELLED
+	 NSString* email = (NSString *)ABMultiValueCopyLabelAtIndex(ABRecordCopyValue(person, kABPersonEmailProperty), 2);
+	 NSLog(@"%@", email);
+	 [dummyContact setValue:email forKey:@"mail"];
+	 
+	 NSString* tel = (NSString *)ABRecordCopyValue(person, kABPersonPhoneMobileLabel);
+	 [dummyContact setValue:tel forKey:@"tel"];
+	 
+	 */
+	
+	
+	
+	// Add in the right place
+	if (indexPathForContactChooser.section == 0) { // Edit ID		
+		// Set the new one
+		[[NSUserDefaults standardUserDefaults] setObject:dic forKey:@"identite"];
+	} else { // Edit others
+		// Coloc number
+		int numColoc = indexPathForContactChooser.row;
+		if (colocs == nil) { // If colocs is not set (BTW, numColoc = 0)
+			colocs = [[NSMutableArray alloc] init];
+		}	
+		[colocs insertObject:dic atIndex:numColoc];
+		NSLog(@"%@", colocs);
+		// Write the new coloc value
+		[[NSUserDefaults standardUserDefaults] setObject:colocs forKey:@"colocataires"];
+	} 		
+	
+	
+	// Release allow'd data
+	[dic release];
+	
+	
+    [self dismissModalViewControllerAnimated:YES];
+	
+    return NO;
+}
+
+- (BOOL)peoplePickerNavigationController:
+(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+                                property:(ABPropertyID)property
+                              identifier:(ABMultiValueIdentifier)identifier{
+    return NO;
+}
+
+
 
 
 #pragma mark -
@@ -198,7 +333,6 @@
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
     // Relinquish ownership any cached data, images, etc. that aren't in use.
 }
 
@@ -206,6 +340,7 @@
 	[colocs release];
 	[identite release];
 	[fichiers release];
+	[indexPathForContactChooser release];
 }
 
 
