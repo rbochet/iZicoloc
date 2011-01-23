@@ -32,8 +32,10 @@
 - (void)delParameters {
 	// Write nil in all the parameters
 	[[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"colocataires"];
-	[[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"identite"];
 	[[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"fichiers"];
+	
+	// Reload the table's content
+	[self.tableView reloadData];
 }
 
 
@@ -54,31 +56,39 @@
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
 	
 	// TEST AREA //
-	/*NSMutableDictionary* myDic = [[NSMutableDictionary alloc] init];
+/*	NSMutableDictionary* myDic = [[NSMutableDictionary alloc] init];
 	[myDic setValue:@"Romain" forKey:@"prenom"];
 	[myDic setValue:@"Bochet" forKey:@"nom"];
-	[[NSUserDefaults standardUserDefaults] setObject:myDic forKey:@"identite"];
-	[myDic release];*/
 	
+	NSMutableDictionary* myDic2 = [[NSMutableDictionary alloc] init];
+	[myDic2 setValue:@"Thomas" forKey:@"prenom"];
+	[myDic2 setValue:@"Giraud" forKey:@"nom"];
+	
+	NSMutableArray* myCol = [[NSMutableArray alloc] init];
+	[myCol addObject:myDic];
+	[myCol addObject:myDic2];
+	[[NSUserDefaults standardUserDefaults] setValue:myCol forKey:@"colocataires"];
+	
+	[myDic release];
+	[myDic2 release];
+	[self displayStoredData]; */
+
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 	// Load the prefs if they exists. Otherwise, pointers are niled.
-	NSArray *colocsImmutable = [[NSUserDefaults standardUserDefaults] arrayForKey:@"colocataires"];
-	colocs = [[NSMutableArray alloc] initWithArray:colocsImmutable];
-	[colocsImmutable release];
+	colocs = [[[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"colocataires"] retain];
 	identite = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"identite"] retain]; 
 	fichiers = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"fichiers"] retain];
 	
-	[self displayStoredData];
+	[self displayStoredData]; 
 }
 
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -220,9 +230,11 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	// Deselect row
+	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
 	// Store the indexpath to let the callback know which field he has to replace
 	indexPathForContactChooser = indexPath;
-	
 	
 	if (indexPath.section < 2) { // Edit people
 		[self showPicker];
@@ -249,9 +261,8 @@
     picker.peoplePickerDelegate = self;
 	
     [self presentModalViewController:picker animated:YES];
-	
-	
     [picker release];
+	[self.tableView reloadData];
 }
 
 
@@ -268,52 +279,59 @@
 	// Load data from adress book
 	NSString* prenom = (NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
 	NSString* nom = (NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);	
+	ABMutableMultiValueRef strangeMail =  ABRecordCopyValue(person, kABPersonEmailProperty);
+	NSString* email =  (NSString*) ABMultiValueCopyValueAtIndex(strangeMail, 0);
+	ABMutableMultiValueRef strangePhone =  ABRecordCopyValue(person, kABPersonPhoneProperty);
+	NSString* phone =  (NSString*) ABMultiValueCopyValueAtIndex(strangePhone, 0);
+
+
 	
 	// Copy in the contact struct TODO TEL MAIL MULTIVALUE
 	NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
 	[dic setValue:prenom forKey:@"prenom"];
 	[dic setValue:nom forKey:@"nom"];
+	[dic setValue:email forKey:@"email"];
+	[dic setValue:phone forKey:@"phone"];
+
 	[prenom release];
 	[nom release];
-
-	/*
-	 
-	 // HERE IS THE PROBLEM W/ MULTIVALUE LABELLED
-	 NSString* email = (NSString *)ABMultiValueCopyLabelAtIndex(ABRecordCopyValue(person, kABPersonEmailProperty), 2);
-	 NSLog(@"%@", email);
-	 [dummyContact setValue:email forKey:@"mail"];
-	 
-	 NSString* tel = (NSString *)ABRecordCopyValue(person, kABPersonPhoneMobileLabel);
-	 [dummyContact setValue:tel forKey:@"tel"];
-	 
-	 */
-	
+	[email release];
+	[phone release];
+	CFRelease(strangeMail);
+	CFRelease(strangePhone);
 	
 	
 	// Add in the right place
-	if (indexPathForContactChooser.section == 0) { // Edit ID		
+	if (indexPathForContactChooser.section == 0) { // Edit "identite"		
 		// Set the new one
 		[[NSUserDefaults standardUserDefaults] setObject:dic forKey:@"identite"];
-	} else { // Edit others
+		[self.tableView reloadData];
+	} else { // Edit a coloc among "colocs"
 		// Coloc number
 		int numColoc = indexPathForContactChooser.row;
+		
 		if (colocs == nil) { // If colocs is not set (BTW, numColoc = 0)
 			colocs = [[NSMutableArray alloc] init];
-		}	
-		[colocs insertObject:dic atIndex:numColoc];
-		NSLog(@"%@", colocs);
-		// Write the new coloc value
+		}
+		
+		if (numColoc >= [colocs count]){
+			[colocs addObject:dic];
+		} else {
+			[colocs replaceObjectAtIndex:numColoc withObject:dic];
+		}
+		
+f		// Write the new coloc value
 		[[NSUserDefaults standardUserDefaults] setObject:colocs forKey:@"colocataires"];
+		[self.tableView reloadData];
 	} 		
 	
-	
+
 	// Release allow'd data
 	[dic release];
 	
-	
-    [self dismissModalViewControllerAnimated:YES];
-	
-    return NO;
+	[peoplePicker dismissModalViewControllerAnimated:YES];
+
+	return NO;
 }
 
 - (BOOL)peoplePickerNavigationController:
@@ -321,6 +339,7 @@
       shouldContinueAfterSelectingPerson:(ABRecordRef)person
                                 property:(ABPropertyID)property
                               identifier:(ABMultiValueIdentifier)identifier{
+	
     return NO;
 }
 
