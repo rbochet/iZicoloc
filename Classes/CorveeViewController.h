@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 
 
-@interface CorveeViewController : UIViewController {
-
+@interface CorveeViewController : UIViewController<UIPickerViewDataSource>{
+	UIPickerView* picker;
+	NSMutableArray* colocs;
 }
 
+@property (nonatomic, retain) IBOutlet UIPickerView* picker;
+
+- (void) choose;
+- (IBAction) buttonChoose:(id) sender;
+	
 @end
