@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+//#import "HomeViewController.h"
 
-
-@interface MessageViewController : UIViewController {
-
+@interface MessageViewController : UIViewController<MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UITextViewDelegate> {
+	UITextView *message;
+	NSMutableArray* colocs;
 }
+
+@property (nonatomic, retain) IBOutlet UITextView *message;
+
+- (IBAction) sendMail:(id)sender;
+- (IBAction) sendSMS:(id)sender;
 
 @end
