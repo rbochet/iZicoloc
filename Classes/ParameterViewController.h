@@ -16,7 +16,8 @@
 	// Userprefs structures
 	NSMutableArray* colocs;		// Need to be altered : add / remove a coloc
 	NSDictionary *identite;		// Do not need to be changed
-	NSArray* fichiers;			// Do not need to be changed : fixed number of files
+	NSString* urlCourses;
+	NSString* urlDepenses;
 	
 	// Store the index path to help when choosing the contact
 	NSIndexPath *indexPathForContactChooser;

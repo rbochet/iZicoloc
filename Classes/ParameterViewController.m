@@ -7,6 +7,7 @@
 //
 
 #import "ParameterViewController.h"
+#import "ChangeUrlViewController.h"
 
 
 @implementation ParameterViewController
@@ -17,7 +18,8 @@
 	// Load the data
 	NSArray *colocsL = [[NSUserDefaults standardUserDefaults] arrayForKey:@"colocataires"];
 	NSDictionary *identiteL = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"identite"]; 
-	NSArray *fichiersL = [[NSUserDefaults standardUserDefaults] arrayForKey:@"fichiers"];
+	NSString *urlCoursesL = [[NSUserDefaults standardUserDefaults] stringForKey:@"urlCourses"];
+	NSString *urlDepensesL = [[NSUserDefaults standardUserDefaults] stringForKey:@"urlDepenses"];
 	
 	// Display  the data
 	NSLog(@"---- DISPLAY STORED DATA ----");
@@ -25,15 +27,16 @@
 	NSLog(@"-----------------------------");
 	NSLog(@"colocs : %@", colocsL);
 	NSLog(@"-----------------------------");
-	NSLog(@"fichiers : %@", fichiersL);
+	NSLog(@"urlCourses : %@", urlCoursesL);
+	NSLog(@"-----------------------------");
+	NSLog(@"urlDepenses : %@", urlDepensesL);
 	NSLog(@"-- END DISPLAY STORED DATA --");
 }
 
 - (void)delParameters {
 	// Write nil in all the parameters
 	[[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"colocataires"];
-	[[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"fichiers"];
-	
+
 	// Reload the table's content
 	[self.tableView reloadData];
 }
@@ -53,24 +56,6 @@
 }
 
 - (void)viewDidLoad {
-	
-	// TEST AREA //
-/*	NSMutableDictionary* myDic = [[NSMutableDictionary alloc] init];
-	[myDic setValue:@"Romain" forKey:@"prenom"];
-	[myDic setValue:@"Bochet" forKey:@"nom"];
-	
-	NSMutableDictionary* myDic2 = [[NSMutableDictionary alloc] init];
-	[myDic2 setValue:@"Thomas" forKey:@"prenom"];
-	[myDic2 setValue:@"Giraud" forKey:@"nom"];
-	
-	NSMutableArray* myCol = [[NSMutableArray alloc] init];
-	[myCol addObject:myDic];
-	[myCol addObject:myDic2];
-	[[NSUserDefaults standardUserDefaults] setValue:myCol forKey:@"colocataires"];
-	
-	[myDic release];
-	[myDic2 release];
-	[self displayStoredData]; */
 
 }
 
@@ -79,33 +64,11 @@
 	// Load the prefs if they exists. Otherwise, pointers are niled.
 	colocs   = [[[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"colocataires"] retain];
 	identite = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"identite"] retain]; 
-	fichiers = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"fichiers"] retain];
-	
+	urlCourses = [[[NSUserDefaults standardUserDefaults] stringForKey:@"urlCourses"] retain];
+	urlDepenses = [[[NSUserDefaults standardUserDefaults] stringForKey:@"urlDepenses"] retain];
+	[self.tableView reloadData];
 	[self displayStoredData]; 
 }
-
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisapp	ear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-*/
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations.
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 
 #pragma mark -
@@ -113,7 +76,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 
@@ -129,14 +92,40 @@
 			else // Just the add line
 				return 1;
 			break;
-		case 2: // For the files (courses/suivi dépenses)
-			return 2;
+		case 2: // For the URL of google docs (courses/suivi dépenses)
+		case 3:
+			return 1;
 			break;
 		default:
 			NSLog(@"ERREUR");
 			break;
 	}
 	return  0;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	// Set each section title
+	
+	NSString* title;
+	switch (section) {
+		case 0:
+			title = @"Mon identité";
+			break;
+		case 1:
+			title = @"Mes colocataires";
+			break;
+		case 2:
+			title = @"La liste de courses";
+			break;
+		case 3:
+			title = @"Le suivi des dépenses";
+			break;
+		default:
+			title = @"Pas de titre";
+			break;
+	}
+	
+	return [title autorelease];
 }
 
 
@@ -165,20 +154,36 @@
 				cell.textLabel.text = @"Ajouter un coloc";
 			}
 			break;
-		case 2: // For the files (courses/suivi dépenses)
-			if (fichiers == nil || [fichiers objectAtIndex:indexPath.row] == nil) { // If the array isn't defined, or the interesting one
+		/*case 2: // For the files (courses/suivi dépenses)
+			if (fichiers == nil || [fichiers objectAtIndex:indexPath.row] == nil || ) { // If the array isn't defined, or the interesting one
 				cell.textLabel.text = @"À définir";
 			} else { // Display the good one :)
 				cell.textLabel.text = [fichiers objectAtIndex:indexPath.row];
 			}
+			break;*/
+		case 2: // For the "courses" google doc URL
+			if (urlCourses != nil){
+				cell.textLabel.text = urlCourses;
+			} else {
+				cell.textLabel.text = @"À définir";
+			}
 			break;
+		case 3: // For the "courses" google doc URL
+			if (urlDepenses != nil){
+				cell.textLabel.text = urlDepenses;
+			} else {
+				cell.textLabel.text = @"À définir";
+			}
+			break;			
 		default:
-			NSLog(@"ERREUR");
+			NSLog(@"Cellule non définie dans tableView cellForRowAtIndexPath");
 			break;
 	}
 	
     return cell;
 }
+
+
 
 
 /*
@@ -230,19 +235,26 @@
 	
 	// Store the indexpath to let the callback know which field he has to replace
 	indexPathForContactChooser = indexPath;
+	ChangeUrlViewController *cuvc;
 	
-	if (indexPath.section < 2) { // Edit people
-		[self showPicker];
-	} else { // Edit files
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pas encore implémentée" 
-														message:@"Cette fonctionalité n'est pas implémentée" 
-													   delegate:nil 
-											  cancelButtonTitle:@"Retour aux params" 
-											  otherButtonTitles:nil];
-		[alert show];
-		[alert release];
-		
+	switch (indexPath.section) {
+		case 2:
+			;
+			cuvc = [[ChangeUrlViewController alloc] initWithNibName :@"ChangeUrlViewController" bundle:nil paramName:@"urlCourses" ];
+			[self presentModalViewController:cuvc animated:YES];
+			break;
+		case 3:
+			;
+			cuvc = [[ChangeUrlViewController alloc] initWithNibName :@"ChangeUrlViewController" bundle:nil paramName:@"urlDepenses" ];
+			[self presentModalViewController:cuvc animated:YES];
+			break;
+		default:
+			// Edit people (0:identity or 1:colocs)
+			[self showPicker];
+			break;
 	}
+	[self.tableView reloadData];
+
 
 }
 
@@ -316,7 +328,6 @@
 	[nom release];
 	[email release];
 	[phone release];
-	//[contactID release];
 	CFRelease(strangeMail);
 	CFRelease(strangePhone);
 	
@@ -347,7 +358,8 @@
 - (void)viewDidUnload {
 	[colocs release];
 	[identite release];
-	[fichiers release];
+	[urlCourses release];
+	[urlDepenses release];
 	[indexPathForContactChooser release];
 }
 
