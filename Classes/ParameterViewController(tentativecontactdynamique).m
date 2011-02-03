@@ -29,6 +29,7 @@
 	NSLog(@"-- END DISPLAY STORED DATA --");
 }
 
+
 - (void)delParameters {
 	// Write nil in all the parameters
 	[[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"colocataires"];
@@ -37,6 +38,8 @@
 	// Reload the table's content
 	[self.tableView reloadData];
 }
+
+
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -51,6 +54,7 @@
     }
     return self;
 }
+
 
 - (void)viewDidLoad {
 	
@@ -74,10 +78,12 @@
 
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	// Load the prefs if they exists. Otherwise, pointers are niled.
-	colocs   = [[[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"colocataires"] retain];
+	colocs = [[[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"colocataires"] retain];
 	identite = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"identite"] retain]; 
 	fichiers = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"fichiers"] retain];
 	
@@ -260,10 +266,12 @@
 	[self.tableView reloadData];
 }
 
+
 - (void)peoplePickerNavigationControllerDidCancel:
 (ABPeoplePickerNavigationController *)peoplePicker {
     [self dismissModalViewControllerAnimated:YES];
 }
+
 
 - (BOOL)peoplePickerNavigationController:
 (ABPeoplePickerNavigationController *)peoplePicker
@@ -277,6 +285,7 @@
 	ABMutableMultiValueRef strangePhone =  ABRecordCopyValue(person, kABPersonPhoneProperty);
 	NSString* phone =  (NSString*) ABMultiValueCopyValueAtIndex(strangePhone, 0);
 	
+	NSLog(@"contact ID %i" ,ABRecordGetRecordID(person));
 	
 	// Copy in the contact struct TODO TEL MAIL MULTIVALUE
 	NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
@@ -335,6 +344,8 @@
 }
 
 
+
+
 #pragma mark -
 #pragma mark Memory management
 
@@ -350,6 +361,7 @@
 	[fichiers release];
 	[indexPathForContactChooser release];
 }
+
 
 - (void)dealloc {
     [super dealloc];

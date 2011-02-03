@@ -24,7 +24,7 @@
 }
 
 -(void) showPicker;
--(void)displayStoredData;
--(void)delParameters;
+-(void) displayStoredData;
+-(void) delParameters;
 
 @end

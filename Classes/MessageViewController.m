@@ -154,7 +154,7 @@
 			break;
 	}
 	[self dismissModalViewControllerAnimated:YES];
-	[controller release];
+	//[controller release];
 }
 
 // Go to the home page
