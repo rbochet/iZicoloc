@@ -68,11 +68,13 @@
 		[identite release];
 		[emails release];
 		[colocs release];
+		
+		[controller release];
 	}
 }
 
 - (IBAction) sendSMS:(id)sender {
-	MFMessageComposeViewController* controller = [[[MFMessageComposeViewController alloc] init] autorelease];
+	MFMessageComposeViewController* controller = [[MFMessageComposeViewController alloc] init];
 	// Check if the iDevice can send SMS
 	if([MFMessageComposeViewController canSendText]){
 		
@@ -89,10 +91,13 @@
 		controller.messageComposeDelegate = self;
 		
 		[self presentModalViewController:controller animated:YES];
+
 		
 		//Release Data
 		[phoneNumbers release];
-		[colocs release];	
+		[colocs release];
+		
+		[controller release];
 	}	
 }
  
@@ -131,7 +136,6 @@
 
 -(void) mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error{
 	[self dismissModalViewControllerAnimated:YES];
-	[controller release];
 }
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
@@ -141,8 +145,9 @@
 			NSLog(@"Cancelled");
 			break;
 		case MessageComposeResultFailed:
+			// Strange ";" due to C std limitation
 			;
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"iZicolloc" message:@"Unknown Error"
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"iZicoloc" message:@"Unknown Error"
 														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 			[alert show];
 			[alert release];
@@ -154,7 +159,6 @@
 			break;
 	}
 	[self dismissModalViewControllerAnimated:YES];
-	//[controller release];
 }
 
 // Go to the home page
